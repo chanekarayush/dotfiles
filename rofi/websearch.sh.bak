@@ -9,7 +9,7 @@ QUERY=$(
 #formattedQuery="${QUERY// /+}"
 formattedQuery="${QUERY// /%20}"
 
-API_KEY="AIzaSyBN5XUTsCDBcB0-WqmXB5q7RTZp0LaRBhI"
+API_KEY=""
 searchEngineURI="https://customsearch.googleapis.com/customsearch/v1?cx=b1255c41ee4dd4d45&key=$API_KEY&q=$formattedQuery"
 
 selected_url="https://duckduckgo.com/?q=$formattedQuery"

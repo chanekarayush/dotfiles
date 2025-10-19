@@ -1,0 +1,44 @@
+#!/bin/bash
+
+QUERY=$(
+    rofi -dmenu -i -p "Web Search:"
+)
+
+[ -z "$QUERY" ] && exit 0
+
+#formattedQuery="${QUERY// /+}"
+formattedQuery="${QUERY// /%20}"
+
+API_KEY="AIzaSyBN5XUTsCDBcB0-WqmXB5q7RTZp0LaRBhI"
+searchEngineURI="https://customsearch.googleapis.com/customsearch/v1?cx=b1255c41ee4dd4d45&key=$API_KEY&q=$formattedQuery"
+
+selected_url="https://duckduckgo.com/?q=$formattedQuery"
+# RESULTS=$(curl -s "https://api.duckduckgo.com/?&format=json&no_html=1&no_redirect=1&q=$formattedQuery")
+
+RESULTS=$(curl $searchEngineURI | jq -r '.items[] | "\(.title)\n\(.snippet)\n\(.formattedUrl)"' | paste - -)
+
+echo "$RESULTS"
+
+echo "================================================================================================================"
+
+echo "$RESULTS" | cut -f1 
+
+MENU=$RESULTS
+
+
+[ -z "$MENU" ] && { firefox "$selected_url" & exit 0; }
+
+# Show list in Rofi (titles only)
+SELECTED_TITLE=$(echo "$MENU" | cut -f1 | rofi -dmenu -i -p "Results:")
+[ -z "$SELECTED_TITLE" ] && exit 0
+
+# Find matching URL for selected title
+SELECTED_URL=$(echo "$MENU" | grep -F "$SELECTED_TITLE" | cut -f3)
+
+# Open in Firefox
+firefox "$SELECTED_URL" &
+
+sleep 0.5
+
+hyprctl clients -j | jq -r '.[] | select(.class=="firefox") | .address' | head -n 1 | xargs -r -I {} hyprctl dispatch focuswindow address:{}
+

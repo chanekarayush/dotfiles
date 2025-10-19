@@ -1,0 +1,53 @@
+#!/bin/bash
+
+SEARCH_DIR="$HOME"
+
+CHOICE=$(fd . "$SEARCH_DIR" /usr/share/applications ~/.local/share/applications \
+    --hidden --exclude ".cache" --exclude ".local/share/Trash" \
+    | while read -r f; do
+        rel="${f#$HOME/}"
+        if [ -d "$f" ]; then
+            echo "📁 $rel"
+        elif [[ "$f" == *.desktop ]]; then
+            echo "🚀 $(basename "${f%.desktop}")"
+        elif [ -x "$f" ]; then
+            echo "⚙️ $rel"
+        else
+            echo "📄 $rel"
+        fi
+    done \
+        | rofi -dmenu -i -p "Spotlight Search:" -show-icons true) 
+
+# Exit if nothing selected
+[ -z "$CHOICE" ] && exit 0
+
+# Strip emoji and space
+CLEAN_CHOICE="${CHOICE#* }"
+
+# Try to resolve full path if it exists under $HOME
+FULL_PATH="$HOME/$CLEAN_CHOICE"
+
+# 1️⃣ If it’s a desktop app, launch it
+if [[ -f "/usr/share/applications/${CLEAN_CHOICE}.desktop" ]]; then
+    gtk-launch "${CLEAN_CHOICE}"
+    exit 0
+elif [[ -f "$HOME/.local/share/applications/${CLEAN_CHOICE}.desktop" ]]; then
+    gtk-launch "${CLEAN_CHOICE}"
+    exit 0
+fi
+
+# 2️⃣ If it’s a file or folder in $HOME, open it
+if [ -e "$FULL_PATH" ]; then
+    xdg-open "$FULL_PATH"
+    exit 0
+fi
+
+# 3️⃣ If it’s a direct command (like “code”, “firefox”), try executing
+if command -v "$CLEAN_CHOICE" >/dev/null 2>&1; then
+    "$CLEAN_CHOICE" &
+    exit 0
+fi
+
+# 4️⃣ 🌐 Fallback: Web search
+xdg-open "https://www.duckduckgo.com/?q=${CLEAN_CHOICE}"
+

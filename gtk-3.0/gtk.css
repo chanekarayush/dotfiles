@@ -1,0 +1,27 @@
+/* ===== Minecraft Inventory Style for Thunar ===== */
+
+/* Target Thunar's main icon view pane */
+.thunar .icon-view {
+    /* This is the dark background color of the inventory */
+    background-color: #1E1E1E;
+}
+
+/* Style each individual file/folder cell */
+.thunar .icon-view .cell {
+    background-color: rgba(0, 0, 0, 0.6); /* Dark, semi-transparent slot background */
+    border-radius: 2px;
+    border: 2px solid #000000; /* Outer black border */
+    box-shadow: inset 0px 0px 0px 2px #373737; /* Inner grey border */
+}
+
+/* Style for the selected item (when you click on it) */
+.thunar .icon-view .cell:selected {
+    background-color: rgba(70, 70, 150, 0.6); /* A blue/purple highlight */
+    box-shadow: inset 0px 0px 0px 2px #A0A0FF; /* Lighter border when selected */
+}
+
+/* Style the text under the icon */
+.thunar .icon-view .cell .label {
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000; /* Add a shadow to make text readable */
+}

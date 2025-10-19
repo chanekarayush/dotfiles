@@ -12,18 +12,31 @@
         border: none;
         border-radius: 0px;
         font-weight: bold;
-        font-size: 14px;
-        min-height: 22px;
-        margin-left: 2px;
-        margin-right: 2px;
+        font-size: 12px;
+        min-height: 11px;
     }
     
+    .modules-right, .modules-center, .modules-left{
+        background: rgba(1, 20, 35, 0.8);
+        border-radius: 4px;
+        margin-top: 5px;
+    }
+
+    .modules-left{
+        margin-left: 2px;
+    }
+    modules-right{
+        margin-right: 2px;
+    }
+
     window#waybar {
-        background: #011423;
+        background: rgba(1, 20, 35, 0);
+        /* background: #011423; */
         /*Uncomment the below item to add a border.*/
         /*border: 1px solid #9DCBD7;*/
         border-radius: 5px;
     }
+
     
     #workspaces button {
         box-shadow: none;
@@ -37,7 +50,9 @@
     }
     
     #workspaces button.active {
-        background: #011628;
+        border-radius: 10px;
+        background: rgba(1, 20, 35, 0.8);
+        /* background: #011628; */
         color: #ff6a00; /* orange */
         margin-right: 0px;
         margin-left: 0px;
@@ -49,6 +64,8 @@
         background: transparent;
         color: rgba(255,255,255,1);
     }
+
+
     
     #taskbar button {
         box-shadow: none;

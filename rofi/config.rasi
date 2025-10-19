@@ -1,10 +1,14 @@
 configuration {
   display-drun: "Applications:";
   display-window: "Windows:";
+  display-run: "Run:";
+  display-emoji: "Emoji:";
+  display-filebrowser: "Files:";
   drun-display-format: "{icon} {name}";
   font: "JetBrainsMono Nerd Font Bold 12";
-  modi: "window,run,drun,combi";
+  modi: "window,run,drun,filebrowser,emoji,clipboard";
   show-icons: true;
+  show: "drun";
 }
 
 window {
@@ -12,3 +16,4 @@ window {
 }
 
 @theme "mytheme"
+

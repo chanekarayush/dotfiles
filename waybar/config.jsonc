@@ -3,7 +3,7 @@
     "position": "top", // Appears at the top of the screen. Possible values are top, right, bottom, left.
     "modules-left": ["clock", "wlr/taskbar"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["cpu","memory", "network", "pulseaudio", "tray","group/group-power"],
+    "modules-right": [/*"cpu","memory",*/ "network", "pulseaudio", "tray","group/group-power"],
     "custom/appmenu": {
         	"format": "Menu {icon}",
         	"format-icon": "󰻀",
@@ -96,7 +96,7 @@
 	},
      "memory": {
         	"interval": 5,
-        	"format": "󰍛  Mem: {}%",
+        	"format": "󰍛  Mem:{}%",
         	"max-length": 15
     },
 	// A grouped module for all session buttons, like logout, shutdown, etc.

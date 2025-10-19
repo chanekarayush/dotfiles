@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- CONFIG ---
-API_KEY="AIzaSyBN5XUTsCDBcB0-WqmXB5q7RTZp0LaRBhI"
+API_KEY=""
 CX="b1255c41ee4dd4d45"
 # ----------------
 
